@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-item>
+    <ion-label position="floating">E-mail:</ion-label>
+    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Senha:</ion-label>
+    <ion-input type="email" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Confirmar Senha:</ion-label>
+    <ion-input type="email" [(ngModel)]="confPassword"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="register()" >Cadastrar</ion-button>
+
+</ion-content>

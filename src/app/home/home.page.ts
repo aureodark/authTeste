@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { User } from 'firebase';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,6 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor() { }
 
 }

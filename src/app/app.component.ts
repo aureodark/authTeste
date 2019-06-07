@@ -3,6 +3,11 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthGuard } from './guard/auth.guard';
+import { LoggedGuard } from './guard/logged.guard';
+import { AuthService } from './service/auth.service';
+import { auth } from 'firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -30,11 +35,19 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public authGuard: AuthGuard,
+    public loggedGuard: LoggedGuard,
+    public authService: AuthService,
+    private router: Router
   ) {
     this.initializeApp();
   }
 
+    sair(){
+    this.authService.logout();
+    this.router.navigate(["login"]);
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

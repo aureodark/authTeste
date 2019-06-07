@@ -6,7 +6,7 @@ import { AuthService } from '../service/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoggedGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -15,9 +15,9 @@ export class LoggedGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     return new Promise(resolve => {
       this.authService.getAuth().onAuthStateChanged(user => {
-        if (user) this.router.navigate(['home']);
+        if (!user) this.router.navigate(['login']);
 
-        resolve(!user ? true : false);
+        resolve(user ? true : false);
       });
     });
   }

@@ -1,7 +1,5 @@
-export interface User {
+export interface Profile {
     uid?: string,
-    email?: string,
-    password?:string,
     foto?:string,
     nome?:string,
     sobrenome?:string,

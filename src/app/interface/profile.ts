@@ -3,5 +3,8 @@ export interface Profile {
     foto?:string,
     nome?:string,
     sobrenome?:string,
-    cel?:string
+    cel?:string,
+    cartao?: string,
+    hist?: string,
+    email?:string
 }

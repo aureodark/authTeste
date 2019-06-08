@@ -3,13 +3,19 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../interface/user';
 import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Profile } from '../interface/profile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public user: User;
-  constructor(private afa: AngularFireAuth) { }
+  public profile: Profile;
+  constructor(
+    private afa: AngularFireAuth,
+    private afs: AngularFirestore
+  ) { }
 
   login(user: User) {
     return this.afa.auth.signInWithEmailAndPassword(user.email, user.password);
@@ -25,6 +31,13 @@ export class AuthService {
 
   getAuth() {
     return this.afa.auth;
-    
+  }
+
+  getUser(uid: string) {
+    return this.afs.collection("Users").doc(uid).valueChanges();
+  }
+
+  editUser(uid: string, profile) {
+    return this.afs.doc('Users/' + uid).update(profile);
   }
 }

@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../interface/user';
+import { Profile } from '../interface/profile';
 import { AuthService } from '../service/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Profile } from '../interface/profile';
-import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
 })
-export class RegisterPage implements OnInit {
-  public user: User = {};
+export class ProfilePage implements OnInit {
   public profile: Profile = {};
   private loading: any;
+  public userUid: string;
 
   constructor(
     private authService: AuthService,
@@ -24,30 +23,33 @@ export class RegisterPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private router: Router
-
   ) {
     this.afa.user.subscribe((res => {
-      this.user = res;
-      this.profile.email = res.email;
-    }));
-    
-    
+      this.userUid = res.uid;
+      this.authService.getUser(this.userUid).subscribe(
+        res => {
+          this.profile = res;
+        }
+      );
+    }
+    )
+    );
+
   }
 
   ngOnInit() {
+
+
+
+
   }
 
-  async register() {
-    await this.presentLoading();
+  async editUser() {
     try {
-      const newUserObject = Object.assign({}, this.profile);
-      await this.afs.collection('Users').doc(this.user.uid).set(newUserObject);
-      this.presentToast("Bem vindo " + this.profile.nome + " " + this.profile.sobrenome + " !");
-      this.router.navigate(["home"]);
+      await this.authService.editUser(this.userUid, this.profile);
     } catch (error) {
       console.error(error);
-    } finally {
-      this.loading.dismiss();
+
     }
   }
 
@@ -60,4 +62,5 @@ export class RegisterPage implements OnInit {
     const toast = await this.toastCtrl.create({ message, duration: 3000 });
     toast.present();
   }
+
 }

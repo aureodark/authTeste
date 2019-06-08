@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
       switch (error.code) {
 
         case 'auth/argument-error':
-          message = 'Usuário ou senha inválida.';
+          message = 'E-mail ou senha inválida.';
           break;
         case 'auth/invalid-email':
           message = 'E-mail inválido.';
@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
           message = 'Senha inválida';
           break;
         case 'auth/user-not-found':
-          message = 'Usuário não existe.';
+          message = 'E-mail não existe.';
           break;
         case 'auth/too-many-requests':
           message = 'Muitas solicitações, aguarde...'
@@ -104,10 +104,13 @@ export class LoginPage implements OnInit {
           message = 'Essa conta já existe!';
           break;
         case 'auth/argument-error':
-          message = 'Usuário ou senha inválida.';
+          message = 'E-mail ou senha inválida.';
           break;
         case 'auth/weak-password':
           message = 'Senha muito curta.';
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido.';
           break;
       }
 

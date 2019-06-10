@@ -51,7 +51,7 @@ export class AppComponent {
 
     sair(){
     this.authService.logout();
-    this.router.navigate(["login"]);
+    this.router.navigate([""]);
   }
   initializeApp() {
     this.platform.ready().then(() => {

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="Que evento procura?"></ion-searchbar>
+
+
+  <ion-list [hidden]="!search.length">
+    <ion-item *ngFor=" let result of searchResults">
+      {{ result.categoria }}
+    </ion-item>
+  </ion-list>
+
+
+  <ion-button (click)="evento()" expand="block">Criar evento</ion-button>
+
+  <ion-card *ngFor=" let e of event">
+    <ion-img src="{{e.foto}}"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{ e.categoria }}</ion-card-subtitle>
+      <ion-card-title> {{ e.nome }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ e.descricao }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

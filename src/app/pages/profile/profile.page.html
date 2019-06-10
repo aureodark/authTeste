@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+
+  <ion-list>
+    <ion-item>
+        <ion-img [src]="profile.foto"></ion-img>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="verdade">Editar perfil</ion-label>
+      <ion-label *ngIf="!verdade">Cancelar edição</ion-label>
+      <ion-toggle checked (ionChange)="onChanged($event)"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Foto:</ion-label>
+      <ion-input [(ngModel)]="profile.foto" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nome:</ion-label>
+      <ion-input [(ngModel)]="profile.nome" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Sobrenome:</ion-label>
+      <ion-input [(ngModel)]="profile.sobrenome" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail:</ion-label>
+      <ion-input [(ngModel)]="profile.email" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Celular:</ion-label>
+      <ion-input [(ngModel)]="profile.cel" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cartão de Crédito:</ion-label>
+      <ion-input [(ngModel)]="profile.cartao" disabled="{{verdade}}"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+
+  <ion-button *ngIf="!verdade" (click)="editUser()" expand="block">Editar</ion-button>
+
+</ion-content>

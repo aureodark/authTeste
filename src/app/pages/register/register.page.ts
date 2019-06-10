@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../interface/user';
-import { AuthService } from '../service/auth.service';
+import { User } from '../../interface/user';
+import { AuthService } from '../../service/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Profile } from '../interface/profile';
+import { Profile } from '../../interface/profile';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
 
@@ -13,7 +13,6 @@ import { ToastController, LoadingController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  public user: User = {};
   public profile: Profile = {};
   private loading: any;
 
@@ -27,7 +26,7 @@ export class RegisterPage implements OnInit {
 
   ) {
     this.afa.user.subscribe((res => {
-      this.user = res;
+      this.profile.uid = res.uid;
       this.profile.email = res.email;
     }));
     
@@ -40,8 +39,8 @@ export class RegisterPage implements OnInit {
   async register() {
     await this.presentLoading();
     try {
-      const newUserObject = Object.assign({}, this.profile);
-      await this.afs.collection('Users').doc(this.user.uid).set(newUserObject);
+      const newProfile = Object.assign({}, this.profile);
+      await this.authService.addUser(this.profile.uid, newProfile);
       this.presentToast("Bem vindo " + this.profile.nome + " " + this.profile.sobrenome + " !");
       this.router.navigate(["home"]);
     } catch (error) {

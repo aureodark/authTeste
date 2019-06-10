@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="none">
+      <h3>Organizador</h3>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nome:</ion-label>
+      <ion-input disabled [(ngModel)]="profile.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email:</ion-label>
+      <ion-input disabled [(ngModel)]="profile.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Celular:</ion-label>
+      <ion-input disabled [(ngModel)]="profile.cel"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item lines="none">
+      <h3>Evento</h3>
+    </ion-item>
+    <ion-item>
+      <ion-label>Foto:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.foto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nome:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Categoria:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.categoria"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Data:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.data"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descrição:</ion-label>
+      <ion-textarea type="text" [(ngModel)]="event.descricao"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Preço:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.preco"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Local:</ion-label>
+      <ion-input type="text" [(ngModel)]="event.local"></ion-input>
+    </ion-item>
+    
+    <ion-button expand="block" (click)="addEvent()">Criar evento</ion-button>
+    <ion-button expand="block" (click)="exit()">Cancelar</ion-button>
+  </ion-list>
+</ion-content>

@@ -4,8 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { User } from '../interface/user';
-import { AuthService } from '../service/auth.service';
+import { User } from '../../interface/user';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -44,7 +44,8 @@ export class LoginPage implements OnInit {
 
     try {
       await this.authService.login(this.userLogin);
-      this.presentToast("Logado com sucesso!");
+      this.userLogin = {};
+      this.presentToast("Bem vindo!");
       this.router.navigate(["home"]);
 
     } catch (error) {

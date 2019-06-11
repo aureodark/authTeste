@@ -18,6 +18,7 @@ export class EventPage implements OnInit {
   public userUid: string;
   public event: Event = {};
   private loading: any;
+  public category = new Array();
 
   constructor(
     private authService: AuthService,
@@ -37,6 +38,11 @@ export class EventPage implements OnInit {
           this.profile.uid = id.uid;
         });
     }));
+    this.afs.collection('Category').valueChanges().subscribe(res => {
+      this.category = res;
+
+    });
+
   }
 
 
@@ -47,7 +53,7 @@ export class EventPage implements OnInit {
       const newEvent = Object.assign({}, this.event);
       this.event.uid = this.afs.createId();
       await this.afs.collection('Events').doc(this.event.uid).set(newEvent);
-      
+
       this.router.navigate(["home"]);
     } catch (error) {
       console.error(error);
@@ -56,10 +62,10 @@ export class EventPage implements OnInit {
     }
   }
 
-  async exit(){
+  async exit() {
     this.event = {};
     await this.router.navigate(["home"]);
-    
+
   }
 
   async presentLoading() {

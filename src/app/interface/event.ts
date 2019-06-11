@@ -2,7 +2,7 @@ export interface Event {
     uid?: string,
     foto?: string,
     nome?: string,
-    categoria?: string,
+    categorias?: string[],
     data?: string,
     descricao?: string,
     preco?: string,

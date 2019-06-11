@@ -19,7 +19,7 @@
     <ion-item>
       <ion-label *ngIf="verdade">Editar perfil</ion-label>
       <ion-label *ngIf="!verdade">Cancelar edição</ion-label>
-      <ion-toggle checked (ionChange)="onChanged($event)"></ion-toggle>
+      <ion-toggle checked="{{verdade}}" (ionChange)="onChanged($event)"></ion-toggle>
     </ion-item>
 
     <ion-item>

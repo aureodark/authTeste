@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class HomePage {
   public event = new Array<Event>();
-  public search: string ='';
+  public search: string = '';
   public searchResults = new Array<any>();
 
   constructor(
@@ -33,12 +33,14 @@ export class HomePage {
     this.router.navigate(["event"]);
   }
 
-  searchChanged(){
+  searchChanged() {
     if (!this.search.trim().length) return;
 
-    this.afs.collection('Events').valueChanges().subscribe( res => {
+    this.afs.collection('Events', ref => ref.orderBy('categoria').startAt(this.search).endAt(this.search + '\uf8ff')).valueChanges().subscribe(res => {
       this.searchResults = res;
+
     });
-     
+
+
   }
 }

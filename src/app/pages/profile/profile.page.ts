@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ProfilePage implements OnInit {
   public profile: Profile = {};
   private loading: any;
-  public userUid: string;
+  public userUid: string = null;
   public verdade: any = true;
 
   constructor(
@@ -53,6 +53,7 @@ export class ProfilePage implements OnInit {
   async editUser() {
     try {
       await this.authService.editUser(this.profile.uid, this.profile);
+      this.verdade = true;
       this.presentToast("Dados atualizados com sucesso!");
       this.router.navigate(["home"]);
     } catch (error) {

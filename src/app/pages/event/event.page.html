@@ -34,9 +34,10 @@
       <ion-label position="floating">Nome:</ion-label>
       <ion-input type="text" [(ngModel)]="event.nome"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Categoria:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.categoria"></ion-input>
+    
+    <ion-item *ngFor="let c of category" >
+      <ion-label>{{ c.nome }}</ion-label>
+      <ion-checkbox></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Data:</ion-label>

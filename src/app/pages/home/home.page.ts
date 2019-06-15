@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/service/auth.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
   public event = new Array<Event>();
   public search: string = '';
@@ -23,24 +24,24 @@ export class HomePage {
     private router: Router,
     private authService: AuthService
   ) {
-
     this.afs.collection('Events').valueChanges().subscribe(res => {
       this.event = res;
     });
-
   }
+
   evento() {
     this.router.navigate(["event"]);
   }
 
+  viewEvent(uid: string) {
+    this.router.navigate(['view-event/' + uid]);
+  }
+
   searchChanged() {
     if (!this.search.trim().length) return;
-
     this.afs.collection('Events', ref => ref.orderBy('categoria').startAt(this.search).endAt(this.search + '\uf8ff')).valueChanges().subscribe(res => {
       this.searchResults = res;
-
     });
-
-
   }
+
 }

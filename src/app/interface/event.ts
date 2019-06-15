@@ -6,6 +6,7 @@ export interface Event {
     data?: string,
     descricao?: string,
     preco?: string,
+    quantIngressos?:string,
     local?: string,
     listaUsers?: {
         uid?: string,

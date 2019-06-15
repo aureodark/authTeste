@@ -81,8 +81,8 @@ export class EventPage implements OnInit {
     await this.presentLoading();
     try {
       this.event.organizador = this.profile;
-      const newEvent = Object.assign({}, this.event);
       this.event.uid = this.afs.createId();
+      const newEvent = Object.assign({}, this.event);
       await this.afs.collection('Events').doc(this.event.uid).set(newEvent);
 
       this.router.navigate(["home"]);

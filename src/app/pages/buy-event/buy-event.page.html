@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Comprar Ingresso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-item>
+    <ion-label position="floating">Nome:</ion-label>
+    <ion-input [(ngModel)]="profile.nome"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Sobrenome:</ion-label>
+    <ion-input [(ngModel)]="profile.sobrenome"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">E-mail:</ion-label>
+    <ion-input [(ngModel)]="profile.email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Celular:</ion-label>
+    <ion-input [(ngModel)]="profile.cel"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cartão de Crédito:</ion-label>
+    <ion-input [(ngModel)]="profile.cartao"></ion-input>
+  </ion-item>
+
+
+
+<ion-button (click)="comprarIngresso()" expand="block">Finalizar Compra</ion-button>
+
+
+</ion-content>

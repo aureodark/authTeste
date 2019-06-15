@@ -52,8 +52,8 @@ export class AuthService {
 
   }
 
-  getEvent() {
-
+  getEvent(uid: string) {
+    return this.afs.collection('Events').doc(uid).valueChanges();
 
   }
 
@@ -61,8 +61,15 @@ export class AuthService {
     return this.afs.collection('Events').valueChanges();
   }
 
-  editEvent() {
-
+  editEvent(uid: string, event) {
+    return this.afs.doc('Events/' + uid).update(event);
   }
 
+  deleteEvent(uid: string){
+    return this.afs.doc('Events/' + uid).delete();
+  }
+
+  buyEvent(uid: string, profile) {
+
+  }
 }

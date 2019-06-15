@@ -4,59 +4,125 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item lines="none">
-      <h3>Organizador</h3>
-    </ion-item>
-    <ion-item>
-      <ion-label>Nome:</ion-label>
-      <ion-input disabled [(ngModel)]="profile.nome"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Email:</ion-label>
-      <ion-input disabled [(ngModel)]="profile.email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Celular:</ion-label>
-      <ion-input disabled [(ngModel)]="profile.cel"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item lines="none">
-      <h3>Evento</h3>
-    </ion-item>
-    <ion-item>
-      <ion-label>Foto:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.foto"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nome:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.nome"></ion-input>
-    </ion-item>
-    
-    <ion-item *ngFor="let c of category" >
-      <ion-label>{{ c.nome }}</ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Data:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.data"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Descrição:</ion-label>
-      <ion-textarea type="text" [(ngModel)]="event.descricao"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Preço:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.preco"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Local:</ion-label>
-      <ion-input type="text" [(ngModel)]="event.local"></ion-input>
-    </ion-item>
-    
-    <ion-button expand="block" (click)="addEvent()">Criar evento</ion-button>
-    <ion-button expand="block" (click)="exit()">Cancelar</ion-button>
-  </ion-list>
+<ion-content class="swiper-no-swiping">
+
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="contar">
+    <ion-segment-button value="0">
+      <ion-label>1</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="1">
+      <ion-label>2</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-label>3</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      <ion-label>4</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-slides>
+
+    <ion-slide>
+
+      <div>
+
+        <ion-list>
+          <ion-item lines="none">
+            <h3>Organizador</h3>
+          </ion-item>
+          <ion-item>
+            <ion-label>Nome:</ion-label>
+            <ion-input disabled [(ngModel)]="profile.nome"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email:</ion-label>
+            <ion-input disabled [(ngModel)]="profile.email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Celular:</ion-label>
+            <ion-input disabled [(ngModel)]="profile.cel"></ion-input>
+          </ion-item>
+
+        </ion-list>
+
+      </div>
+
+    </ion-slide>
+
+    <ion-slide>
+
+      <div>
+
+        <ion-list>
+          <ion-item lines="none">
+            <h3>Evento</h3>
+          </ion-item>
+          <ion-item>
+            <ion-label>Foto:</ion-label>
+            <ion-input type="text" [(ngModel)]="event.foto"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nome:</ion-label>
+            <ion-input type="text" [(ngModel)]="event.nome"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Data:</ion-label>
+            <ion-input type="text" [(ngModel)]="event.data"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Preço:</ion-label>
+            <ion-input type="text" [(ngModel)]="event.preco"></ion-input>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </ion-slide>
+
+    <ion-slide>
+
+      <div>
+
+        <ion-item *ngFor="let c of category">
+          <ion-label>{{ c.nome }}</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </ion-item>
+
+      </div>
+
+    </ion-slide>
+
+    <ion-slide>
+
+      <div>
+        <ion-list>
+
+          <ion-item>
+            <ion-label position="floating">Descrição:</ion-label>
+            <ion-textarea type="text" [(ngModel)]="event.descricao"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Local:</ion-label>
+            <ion-input type="text" [(ngModel)]="event.local"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" (click)="addEvent()">Criar evento</ion-button>
+          <ion-button expand="block" (click)="exit()">Cancelar</ion-button>
+        </ion-list>
+
+      </div>
+    </ion-slide>
+
+
+  </ion-slides>
+
+  <ion-item (click)="segmentChanged($event)">
+    <ion-button>
+      Voltar
+    </ion-button>
+    <ion-button>
+      Próximo
+    </ion-button>
+  </ion-item>
+
 </ion-content>

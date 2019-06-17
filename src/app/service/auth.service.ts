@@ -29,6 +29,9 @@ export class AuthService {
   }
 
   logout() {
+    this.user = {};
+    this.profile = {};
+    this.event = {};
     return this.afa.auth.signOut();
   }
 

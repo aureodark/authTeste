@@ -3,7 +3,7 @@ import { Profile } from '../../interface/profile';
 import { AuthService } from '../../service/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ToastController, LoadingController, IonToggle } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class ProfilePage implements OnInit {
   public profile: Profile = {};
   private loading: any;
-  public userUid: string = null;
   public verdade: any = true;
 
   constructor(
@@ -30,7 +29,6 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
-
     this.afa.user.subscribe((id => {
       this.authService.getUser(id.uid).subscribe(
         res => {

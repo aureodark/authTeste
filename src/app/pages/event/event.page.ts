@@ -98,8 +98,6 @@ export class EventPage implements OnInit {
     this.event = {};
     this.slides.slideTo(0);
     this.contar = 0;
-
-
   }
 
   async presentLoading() {

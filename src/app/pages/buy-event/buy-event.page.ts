@@ -17,7 +17,6 @@ export class BuyEventPage implements OnInit {
   public event: Event = {};
   private loading: any;
 
-
   constructor(
     private authService: AuthService,
     private afa: AngularFireAuth,
@@ -30,9 +29,6 @@ export class BuyEventPage implements OnInit {
 
   ngOnInit() {
 
-
-
-
     this.afa.user.subscribe((id => {
       this.authService.getUser(id.uid).subscribe(
         res => {
@@ -44,27 +40,24 @@ export class BuyEventPage implements OnInit {
     this.afs.collection('Events').doc(id).valueChanges().subscribe(
       res => {
         this.event = res;
+        console.log(this.event);
       });
+
   }
 
   async comprarIngresso() {
     await this.presentLoading();
     try {
-      this.event.listaUsers = this.profile;
-      /*this.event.uid = this.afs.createId();*/
-      const newEvent = Object.assign({}, this.event);
-      await this.afs.collection('Events').doc(this.event.uid).set(newEvent);
-
-      this.router.navigate(["home"]);
+      const newUser = Array(this.profile);
+      this.event.listaUsers = newUser;
+      await this.afs.collection('Events').doc(this.event.uid).set(this.event);
+      /*this.router.navigate(["home"]);*/
     } catch (error) {
       console.error(error);
     } finally {
       this.loading.dismiss();
     }
-
   }
-
-
 
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });

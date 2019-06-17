@@ -5,7 +5,7 @@ export interface Event {
     data?: string,
     descricao?: string,
     preco?: string,
-    quantIngressos?:string,
+    quantIngressos?:number,
     local?: string,
     organizador?: {
         uid?: string,

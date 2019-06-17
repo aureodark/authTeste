@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Profile } from 'src/app/interface/profile';
 import { Event } from 'src/app/interface/event';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-buy-event',
@@ -16,6 +17,8 @@ export class BuyEventPage implements OnInit {
   public profile: Profile = {};
   public event: Event = {};
   private loading: any;
+  user: Observable<Profile[]>;
+  private userCollection: AngularFirestoreCollection<Profile>;
 
   constructor(
     private authService: AuthService,
@@ -24,7 +27,7 @@ export class BuyEventPage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -48,9 +51,25 @@ export class BuyEventPage implements OnInit {
   async comprarIngresso() {
     await this.presentLoading();
     try {
-      const newUser = Array(this.profile);
+      this.userCollection = this.afs.collection<Profile>('Events/' + this.event.uid + '/listaUsers');
+      this.user = this.userCollection.valueChanges();
+      this.userCollection.add(this.profile);
+      this.event.quantIngressos = this.event.quantIngressos - 1;
+      
+      console.log(this.userCollection);
+      console.log(this.user);
+      console.log(this.event);
+      console.log(this.event.quantIngressos);
+      
+      
+      
+      
+      /*const newUser = Array(this.profile,this.profile);
       this.event.listaUsers = newUser;
-      await this.afs.collection('Events').doc(this.event.uid).set(this.event);
+      
+      await this.afs.collection('Events').doc(this.event.uid).update(this.event);
+
+      /*await this.afs.collection('Events').doc(this.event.uid).update(this.event);*/
       /*this.router.navigate(["home"]);*/
     } catch (error) {
       console.error(error);

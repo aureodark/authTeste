@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
+  public color = Array( 'primary','secondary', 'danger');
+  public names = Array( 'Rock', 'Samba', 'Pop');
+  
   private selectedItem: any;
   private icons = [
     'flask',
@@ -30,6 +33,14 @@ export class ListPage implements OnInit {
     }
   }
 
+  clicou(){
+    const primaryColor = this.color[0];
+    this.color[0] = '';
+    let tam = this.color.length;
+
+    console.log(tam);
+    
+  }
   ngOnInit() {
   }
   // add back when alpha.4 is out

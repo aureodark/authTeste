@@ -21,7 +21,6 @@ export class EventPage implements OnInit {
   private loading: any;
   public category = new Array();
   public contar: number = 0;
-  public valueSegment: ['eventOne', 'eventTwo'];
 
   constructor(
     private authService: AuthService,

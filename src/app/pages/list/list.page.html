@@ -25,36 +25,35 @@
     </div>
   -->
 
- <div *ngFor="let n of names">
-  <div *ngFor="let c of color">
-  <ion-chip [color]="c" (click)="clicou()">
-    <ion-label>{{ n }}</ion-label>
+  <div *ngFor="let c of category">
+  <ion-chip [color]="c.color" (click)="clicou(c.nome)">
+    <ion-label>{{ c.nome }}</ion-label>
     <ion-icon name="close-circle"></ion-icon>
   </ion-chip>
 </div>
-  </div>
 
 
-    <ion-chip outline="" color="primary" class="ion-color-primary" checked>
-      <ion-icon name="pin"></ion-icon>
-      <ion-label>Madison</ion-label>
-      <ion-icon name="close-circle"></ion-icon>
-    </ion-chip>
-    <ion-chip outline="" color="secondary" class="ion-color ion-color-secondary ios chip-outline ion-activatable hydrated">
-      <ion-icon name="wine" role="img" class="ios hydrated" aria-label="wine"></ion-icon>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">Nightlife</ion-label>
-      <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"></ion-icon>
-    </ion-chip>
-    <ion-chip outline="" color="tertiary" class="ion-color ion-color-tertiary ios chip-outline ion-activatable hydrated">
-      <ion-icon name="restaurant" role="img" class="ios hydrated" aria-label="restaurant"></ion-icon>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">Dining</ion-label>
-      <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"></ion-icon>
-    </ion-chip>
-    <ion-chip outline="" color="dark" class="ion-color ion-color-dark ios chip-outline ion-activatable hydrated">
-      <ion-icon name="videocam" role="img" class="ios hydrated" aria-label="videocam"></ion-icon>
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">Entertainment</ion-label>
-      <ion-icon name="close-circle" role="img" class="ios hydrated" aria-label="close circle"></ion-icon>
-    </ion-chip>
+<ion-list>
+  <ion-radio-group>
+    <ion-list-header>
+      <ion-label>Name</ion-label>
+    </ion-list-header>
 
+    <ion-item>
+      <ion-label>Biff</ion-label>
+      <ion-radio slot="start" value="biff" checked></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Griff</ion-label>
+      <ion-radio slot="start" value="griff"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Buford</ion-label>
+      <ion-radio slot="start" value="buford"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-list>
 
 </ion-content>

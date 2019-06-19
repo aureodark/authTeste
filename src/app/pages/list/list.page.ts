@@ -9,10 +9,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class ListPage implements OnInit {
   public category = new Array<Category>();
-  public color = Array('primary', 'secondary', 'danger');
-  public names = Array('Rock', 'Samba', 'Pop');
-  public boliano: boolean = false;
-  public i: number = 0;
   public categorias = Array();
 
   private selectedItem: any;
@@ -45,29 +41,20 @@ export class ListPage implements OnInit {
     this.afs.collection('Category').valueChanges().subscribe(res => {
       this.category = res;
       console.log(this.category);
-
     });
-
   }
 
-  clicou(nome: string) {
-
-    let tam = this.category.length
-
-    if (this.i == tam) {
-
-      console.log('Impossivel inserir novas categorias');
-
+  clicou(nome: string, color: string) {
+    let pos = this.categorias.indexOf(nome);
+    if (pos >= 0) {
+      this.categorias.splice(pos, 1)
+      document.getElementById(nome).setAttribute( 'color' , '');
     } else {
-
-      this.categorias[this.i] = nome;
-
-      this.i = this.i + 1;
-
-      console.log(this.categorias);
-
+      this.categorias.push(nome);
+      document.getElementById(nome).setAttribute( 'color' , color);
     }
-
+    console.log(this.categorias);
+    
   }
   // add back when alpha.4 is out
   // navigate(item) {

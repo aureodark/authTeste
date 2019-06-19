@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
+import { Category } from 'src/app/interface/category';
 
 @Component({
   selector: 'app-event',
@@ -19,8 +20,9 @@ export class EventPage implements OnInit {
   public userUid: string = null;
   public event: Event = {};
   private loading: any;
-  public category = new Array();
   public contar: number = 0;
+  public category = new Array<Category>();
+  public categorias = Array();
 
   constructor(
     private authService: AuthService,
@@ -42,9 +44,19 @@ export class EventPage implements OnInit {
     }));
     this.afs.collection('Category').valueChanges().subscribe(res => {
       this.category = res;
-
     });
 
+
+  }
+  clicou(nome: string, color: string) {
+    let pos = this.categorias.indexOf(nome);
+    if (pos >= 0) {
+      this.categorias.splice(pos, 1)
+      document.getElementById(nome).setAttribute('color', '');
+    } else {
+      this.categorias.push(nome);
+      document.getElementById(nome).setAttribute('color', color);
+    }
   }
 
   segmentChanged(event: any) {
@@ -80,6 +92,7 @@ export class EventPage implements OnInit {
     await this.presentLoading();
     try {
       this.event.organizador = this.profile;
+      this.event.categorias = this.categorias;
       this.event.uid = this.afs.createId();
       const newEvent = Object.assign({}, this.event);
       await this.afs.collection('Events').doc(this.event.uid).set(newEvent);

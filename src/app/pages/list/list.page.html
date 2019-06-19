@@ -26,9 +26,8 @@
   -->
 
   <div *ngFor="let c of category">
-  <ion-chip [color]="c.color" (click)="clicou(c.nome)">
-    <ion-label>{{ c.nome }}</ion-label>
-    <ion-icon name="close-circle"></ion-icon>
+  <ion-chip (click)="clicou(c.nome, c.color)" [id]="c.nome" >
+    <ion-label >{{ c.nome }}</ion-label>
   </ion-chip>
 </div>
 

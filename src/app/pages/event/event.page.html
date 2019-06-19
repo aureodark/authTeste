@@ -84,13 +84,10 @@
 
     <ion-slide>
 
-      <div>
-
-        <ion-item *ngFor="let c of category">
-          <ion-label>{{ c.nome }}</ion-label>
-          <ion-checkbox></ion-checkbox>
-        </ion-item>
-
+      <div *ngFor="let c of category">
+        <ion-chip (click)="clicou(c.nome, c.color)" [id]="c.nome" >
+          <ion-label >{{ c.nome }}</ion-label>
+        </ion-chip>
       </div>
 
     </ion-slide>

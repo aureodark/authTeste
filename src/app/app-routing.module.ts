@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'list', loadChildren: './pages/list/list.module#ListPageModule', canActivate: [AuthGuard] },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [LoggedGuard] },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuard]  },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
   { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' },
   { path: 'view-event/:uid', loadChildren: './pages/view-event/view-event.module#ViewEventPageModule' },
   { path: 'buy-event/:uid', loadChildren: './pages/buy-event/buy-event.module#BuyEventPageModule' }
@@ -24,7 +24,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

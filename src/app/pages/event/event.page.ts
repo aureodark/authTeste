@@ -96,8 +96,8 @@ export class EventPage implements OnInit {
       this.event.uid = this.afs.createId();
       const newEvent = Object.assign({}, this.event);
       await this.afs.collection('Events').doc(this.event.uid).set(newEvent);
-
       this.router.navigate(["home"]);
+      this.contar = 0;
     } catch (error) {
       console.error(error);
     } finally {
@@ -108,7 +108,6 @@ export class EventPage implements OnInit {
   async exit() {
     await this.router.navigate(["home"]);
     this.event = {};
-    this.slides.slideTo(0);
     this.contar = 0;
   }
 

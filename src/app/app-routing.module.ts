@@ -9,11 +9,11 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule', canActivate: [AuthGuard] },
-  { path: 'list', loadChildren: './pages/list/list.module#ListPageModule', canActivate: [AuthGuard] },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [LoggedGuard] },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
+  { path: 'list', loadChildren: './pages/list/list.module#ListPageModule',/* canActivate: [AuthGuard]*/ },
+{ path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', /*canActivate: [LoggedGuard] */},
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' },
   { path: 'view-event/:uid', loadChildren: './pages/view-event/view-event.module#ViewEventPageModule' },
   { path: 'buy-event/:uid', loadChildren: './pages/buy-event/buy-event.module#BuyEventPageModule' }

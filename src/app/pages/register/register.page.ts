@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../interface/user';
 import { AuthService } from '../../service/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Profile } from '../../interface/profile';
 import { Router } from '@angular/router';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { IonSlides, ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +13,12 @@ import { ToastController, LoadingController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  @ViewChild(IonSlides) slides: IonSlides;
   public profile: Profile = {};
+  public userRegister: User;
   private loading: any;
+  public confPassword: string = '';
+
 
   constructor(
     private authService: AuthService,
@@ -25,15 +29,30 @@ export class RegisterPage implements OnInit {
     private router: Router
 
   ) {
-    this.afa.user.subscribe((res => {
+   /* this.afa.user.subscribe((res => {
       this.profile.uid = res.uid;
       this.profile.email = res.email;
-    }));
-    
-    
+    }));*/
+
+
   }
 
   ngOnInit() {
+  }
+  evento(event:any) {
+    console.log(event);
+    
+  }
+
+  clicou(event: any) {
+    if (event.target.innerText == "PRÓXIMO") {
+      this.slides.slideNext()
+    } else if (event.target.innerText == "VOLTAR") {
+      this.slides.slidePrev()
+    }
+    console.log(event);
+
+
   }
 
   async register() {

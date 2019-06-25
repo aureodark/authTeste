@@ -6,5 +6,6 @@ export interface Profile {
     cel?:string,
     cartao?: string,
     hist?: string,
-    email?:string
+    email?:string,
+    categorias?: {}
 }

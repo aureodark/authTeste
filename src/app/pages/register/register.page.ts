@@ -18,6 +18,7 @@ export class RegisterPage implements OnInit {
   public userRegister: User = {};
   private loading: any;
   public confPassword: string = '';
+  public boliano: boolean;
 
   constructor(
     private authService: AuthService,
@@ -29,7 +30,24 @@ export class RegisterPage implements OnInit {
 
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.boliano = false;
+    this.afa.user.subscribe(
+      res => {
+        if (res !== null) {
+          this.profile.nome = res.displayName;
+          this.userRegister.email = res.email;
+          this.profile.foto = res.photoURL;
+          this.profile.uid = res.uid;
+          this.boliano = true;
+        } else {
+          this.profile = {};
+        }
+      }
+    )
+
+
+  }
 
   clicou(event: any) {
     if (event.target.innerText == "PRÓXIMO") {
@@ -43,11 +61,16 @@ export class RegisterPage implements OnInit {
     await this.presentLoading();
     try {
       if (this.userRegister.password == this.confPassword) {
-        await this.authService.register(this.userRegister);
+        if (this.boliano !== true) {
+          await this.authService.register(this.userRegister);
+        }
+
         this.profile.email = this.userRegister.email
+
         const newProfile = Object.assign({}, this.profile);
-        this.authService.addUser(newProfile);
+        await this.authService.addUser(newProfile);
         this.presentToast("Bem vindo " + this.profile.nome + " " + this.profile.sobrenome + " !");
+
         this.router.navigate(["home"]);
       } else {
         this.presentToast("Senhas não conferem!");

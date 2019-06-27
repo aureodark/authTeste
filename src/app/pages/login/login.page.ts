@@ -100,11 +100,11 @@ export class LoginPage implements OnInit {
           console.log(this.profile);
           if (this.profile == undefined) {
             console.log('Register');
-            /*this.router.navigate(['register']);*/
+            this.router.navigate(['register']);
 
           } else {
             console.log('Home');
-            /*this.router.navigate(['home']);*/
+            this.router.navigate(['home']);
 
           }
         }

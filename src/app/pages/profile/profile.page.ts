@@ -30,11 +30,15 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.afa.user.subscribe((id => {
-      this.authService.getUser(id.uid).subscribe(
-        res => {
-          this.profile = res;
-          this.profile.uid = id.uid;
-        });
+      if (id == null) {
+
+      } else {
+        this.authService.getUser(id.uid).subscribe(
+          res => {
+            this.profile = res;
+            this.profile.uid = id.uid;
+          });
+      }
     }));
 
   }

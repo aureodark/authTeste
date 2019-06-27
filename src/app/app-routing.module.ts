@@ -6,17 +6,17 @@ import { LoggedGuard } from './guard/logged.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
-  { path: 'list', loadChildren: './pages/list/list.module#ListPageModule',/* canActivate: [AuthGuard]*/ },
-{ path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', /*canActivate: [LoggedGuard] */},
+  { path: 'list', loadChildren: './pages/list/list.module#ListPageModule' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
+  { path: 'event', loadChildren: './pages/event/event.module#EventPageModule', canActivate: [AuthGuard] },
   { path: 'view-event/:uid', loadChildren: './pages/view-event/view-event.module#ViewEventPageModule' },
-  { path: 'buy-event/:uid', loadChildren: './pages/buy-event/buy-event.module#BuyEventPageModule' }
+  { path: 'buy-event/:uid', loadChildren: './pages/buy-event/buy-event.module#BuyEventPageModule', canActivate: [AuthGuard] }
 
 
 

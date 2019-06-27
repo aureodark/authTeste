@@ -29,10 +29,6 @@ export class HomePage {
     });
   }
 
-  evento() {
-    this.router.navigate(["event"]);
-  }
-
   viewEvent(uid: string) {
     this.router.navigate(['view-event/' + uid]);
   }

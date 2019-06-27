@@ -8,12 +8,14 @@ import { LoggedGuard } from './guard/logged.guard';
 import { AuthService } from './service/auth.service';
 import { auth } from 'firebase';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public logado: boolean = true;
   public appPages = [
     {
       title: 'Home',
@@ -24,22 +26,13 @@ export class AppComponent {
       title: 'List',
       url: '/list',
       icon: 'list'
-    },
-    {
-      title: 'Login',
-      url: '/login',
-      icon: 'contact'
-    },
-    {
-      title: 'Profile',
-      url: '/profile',
-      icon: 'contact'
     }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
+    private afa: AngularFireAuth,
     private statusBar: StatusBar,
     public authGuard: AuthGuard,
     public loggedGuard: LoggedGuard,
@@ -47,11 +40,19 @@ export class AppComponent {
     private router: Router
   ) {
     this.initializeApp();
+    this.afa.user.subscribe((id => {
+      if (id == null) {
+
+      } else {
+        this.logado = false;
+      }
+    }));
   }
 
-    sair(){
+  sair() {
     this.authService.logout();
-    this.router.navigate([""]);
+    this.logado = true;
+    this.router.navigate(["home"]);
   }
   initializeApp() {
     this.platform.ready().then(() => {

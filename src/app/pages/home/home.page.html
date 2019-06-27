@@ -21,8 +21,6 @@
   </ion-list>
 
 
-  <ion-button (click)="evento()" expand="block">Criar evento</ion-button>
-
   <ion-card *ngFor=" let e of event" (click)="viewEvent(e.uid)">
     <ion-img src="{{e.foto}}"></ion-img>
     <ion-card-header>

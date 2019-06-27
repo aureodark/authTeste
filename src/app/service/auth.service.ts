@@ -39,8 +39,11 @@ export class AuthService {
     return this.afa.auth;
   }
 
-  addUser(uid: string, profile) {
-    return this.afs.collection('Users').doc(uid).set(profile);
+  addUser(profile: any) {
+    this.afa.user.subscribe((res => {
+      profile.uid = res.uid
+      return this.afs.collection('Users').doc(res.uid).set(profile);
+    }));
   }
 
   getUser(uid: string) {

@@ -18,31 +18,7 @@
 
 
   <ion-slides>
-    <ion-slide>
-
-      <div>
-
-        <span>E-mail e Senha</span>
-        
-        <!-- <ion-item>
-          <ion-input (ionChange)="evento($event)" placeholder="E-mail" type="email" [(ngModel)]="userRegister.email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-input placeholder="Senha" type="password" [(ngModel)]="userRegister.password"></ion-input>
-        </ion-item> -->
-
-        <ion-item>
-          <ion-input placeholder="Confirme sua senha" type="text" [(ngModel)]="confPassword"></ion-input>
-        </ion-item>
-
-
-        <ion-button [disabled]="confPassword.length < 8" (click)="clicou($event)">Próximo</ion-button>
-
-
-      </div>
-
-    </ion-slide>
+    
     <ion-slide>
 
       <div>
@@ -57,34 +33,59 @@
           <ion-input placeholder="Sobrenome" type="text" [(ngModel)]="profile.sobrenome"></ion-input>
         </ion-item>
 
+        
+        <ion-button [disabled]="(profile.nome?.length < 3) || (profile.sobrenome?.length < 3)" (click)="clicou($event)">Próximo</ion-button>
+        
+        
+      </div>
+      
+    </ion-slide>
+    <ion-slide>
+      
+      <div>
+        
+        <span>Outras informações</span>
+        
+        <ion-item>
+          <ion-label>Foto:</ion-label>
+          <ion-input type="text" [(ngModel)]="profile.foto"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-input placeholder="(XX) XXXXX-XXXX" type="tel" [(ngModel)]="profile.cel"></ion-input>
+        </ion-item>
+        
         <ion-button (click)="clicou($event)">Voltar</ion-button>
-        <ion-button (click)="clicou($event)">Próximo</ion-button>
+        <ion-button [disabled]="profile.cel?.length < 11" (click)="clicou($event)">Próximo</ion-button>
+
 
 
       </div>
-
     </ion-slide>
     <ion-slide>
 
       <div>
 
-        <span>Outras informações</span>
-
+        <span>E-mail e Senha</span>
+        
         <ion-item>
-          <ion-label>Foto:</ion-label>
-          <ion-input type="text" [(ngModel)]="profile.foto"></ion-input>
+          <ion-input placeholder="E-mail" type="email" [(ngModel)]="userRegister.email"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input placeholder="(XX) XXXXX-XXXX" type="tel" [(ngModel)]="profile.cel"></ion-input>
+          <ion-input placeholder="Senha" type="password" [(ngModel)]="userRegister.password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input placeholder="Confirme sua senha" type="password" [(ngModel)]="confPassword"></ion-input>
         </ion-item>
 
         <ion-button (click)="clicou($event)">Voltar</ion-button>
-        <ion-button (click)="register()">Finalizar cadastro</ion-button>
-
+        <ion-button [disabled]="(userRegister.password?.length < 8) || (userRegister.email?.length < 8) || (confPassword.length < 8)" (click)="register($event)" >Próximo</ion-button>
 
 
       </div>
+
     </ion-slide>
   </ion-slides>
 

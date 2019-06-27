@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
     <ion-title>
       Login
     </ion-title>
@@ -8,64 +11,25 @@
 
 <ion-content class="swiper-no-swiping">
 
-  <ion-segment (ionChange)="segmentChanged($event)" value="login">
-    <ion-segment-button value="login">
-      <ion-label>Login</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="register">
-      <ion-label>Cadastro</ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
-  <ion-slides>
+  <div>
 
-    <ion-slide>
+    <ion-item>
+      <ion-label position="floating">E-mail:</ion-label>
+      <ion-input type="email" [(ngModel)]="userLogin.email"></ion-input>
+    </ion-item>
 
-      <div>
+    <ion-item>
+      <ion-label position="floating">Senha:</ion-label>
+      <ion-input type="email" [(ngModel)]="userLogin.password"></ion-input>
+    </ion-item>
 
-        <ion-item>
-          <span>Login</span>
-          <ion-label position="floating">E-mail:</ion-label>
-          <ion-input type="email" [(ngModel)]="userLogin.email"></ion-input>
-        </ion-item>
+    <ion-button (click)="login()">Logar</ion-button>
 
-        <ion-item>
-          <ion-label position="floating">Senha:</ion-label>
-          <ion-input type="email" [(ngModel)]="userLogin.password"></ion-input>
-        </ion-item>
+    <ion-item lines="none">
+        <ion-button (click)="loginG()" expand="block">Login pelo Google</ion-button>
+      </ion-item>
+  </div>
 
-        <ion-button (click)="login()">Logar</ion-button>
-
-      </div>
-
-    </ion-slide>
-
-    <ion-slide>
-
-      <div>
-
-        <span>Cadastro</span>
-
-        <ion-item>
-          <ion-label position="floating">E-mail:</ion-label>
-          <ion-input type="email" [(ngModel)]="userRegister.email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Senha:</ion-label>
-          <ion-input type="email" [(ngModel)]="userRegister.password"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Confirmar Senha:</ion-label>
-          <ion-input type="email" [(ngModel)]="confPassword"></ion-input>
-        </ion-item>
-
-        <ion-button (click)="register()">Cadastrar</ion-button>
-      </div>
-
-    </ion-slide>
-
-  </ion-slides>
 
 </ion-content>

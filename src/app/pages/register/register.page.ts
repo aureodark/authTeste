@@ -15,10 +15,9 @@ import { IonSlides, ToastController, LoadingController } from '@ionic/angular';
 export class RegisterPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   public profile: Profile = {};
-  public userRegister: User;
+  public userRegister: User = {};
   private loading: any;
   public confPassword: string = '';
-
 
   constructor(
     private authService: AuthService,
@@ -28,21 +27,9 @@ export class RegisterPage implements OnInit {
     private toastCtrl: ToastController,
     private router: Router
 
-  ) {
-   /* this.afa.user.subscribe((res => {
-      this.profile.uid = res.uid;
-      this.profile.email = res.email;
-    }));*/
+  ) { }
 
-
-  }
-
-  ngOnInit() {
-  }
-  evento(event:any) {
-    console.log(event);
-    
-  }
+  ngOnInit() { }
 
   clicou(event: any) {
     if (event.target.innerText == "PRÓXIMO") {
@@ -50,20 +37,39 @@ export class RegisterPage implements OnInit {
     } else if (event.target.innerText == "VOLTAR") {
       this.slides.slidePrev()
     }
-    console.log(event);
-
-
   }
 
   async register() {
     await this.presentLoading();
     try {
-      const newProfile = Object.assign({}, this.profile);
-      await this.authService.addUser(this.profile.uid, newProfile);
-      this.presentToast("Bem vindo " + this.profile.nome + " " + this.profile.sobrenome + " !");
-      this.router.navigate(["home"]);
+      if (this.userRegister.password == this.confPassword) {
+        await this.authService.register(this.userRegister);
+        this.profile.email = this.userRegister.email
+        const newProfile = Object.assign({}, this.profile);
+        this.authService.addUser(newProfile);
+        this.presentToast("Bem vindo " + this.profile.nome + " " + this.profile.sobrenome + " !");
+        this.router.navigate(["home"]);
+      } else {
+        this.presentToast("Senhas não conferem!");
+      }
     } catch (error) {
-      console.error(error);
+      let message: string;
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'Essa conta já existe!';
+          break;
+        case 'auth/argument-error':
+          message = 'E-mail ou senha inválida.';
+          break;
+        case 'auth/weak-password':
+          message = 'Senha muito curta.';
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido.';
+          break;
+      }
+      this.presentToast(message);
+      console.log(error);
     } finally {
       this.loading.dismiss();
     }

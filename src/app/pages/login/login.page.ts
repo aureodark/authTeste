@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { auth } from 'firebase/app';
 import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { User } from '../../interface/user';
 import { AuthService } from '../../service/auth.service';
+import { Profile } from 'src/app/interface/profile';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +16,10 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginPage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
-  public confPassword: string;
   private loading: any;
-  public userRegister: User = {};
   public userLogin: User = {};
+  public userUid: any;
+  public profile: Profile = {};
 
   constructor(
     private afa: AngularFireAuth,
@@ -82,45 +84,40 @@ export class LoginPage implements OnInit {
   }
 
 
-  async register() {
-    await this.presentLoading();
+  async loginG() {
     try {
-      if (this.userRegister.password == this.confPassword) {
-        await this.authService.register(this.userRegister);
+      await this.afa.auth.signInWithPopup(new auth.GoogleAuthProvider())
+        .then(
+          res => {
+            this.userUid = res.user.uid
+            console.log(this.userUid);
 
-        this.presentToast("Cadastro Efetuado!");
-        this.router.navigate(["register"]);
+          })
 
-      } else {
-        this.presentToast("Senhas não conferem!");
-      }
+      this.authService.getUser(this.userUid).subscribe(
+        res => {
+          this.profile = res;
+          console.log(this.profile);
+          if (this.profile == undefined) {
+            console.log('Register');
+            /*this.router.navigate(['register']);*/
+
+          } else {
+            console.log('Home');
+            /*this.router.navigate(['home']);*/
+
+          }
+        }
+      )
 
     } catch (error) {
-
-      let message: string;
-
-      switch (error.code) {
-
-        case 'auth/email-already-in-use':
-          message = 'Essa conta já existe!';
-          break;
-        case 'auth/argument-error':
-          message = 'E-mail ou senha inválida.';
-          break;
-        case 'auth/weak-password':
-          message = 'Senha muito curta.';
-          break;
-        case 'auth/invalid-email':
-          message = 'E-mail inválido.';
-          break;
-      }
-
-      this.presentToast(message);
       console.log(error);
-    } finally {
-      this.loading.dismiss();
 
     }
+
+
+
+
   }
 
   async presentLoading() {

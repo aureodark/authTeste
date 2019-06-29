@@ -5,6 +5,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +26,7 @@ export class ProfilePage implements OnInit {
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     private router: Router,
+    private storage: AngularFireStorage
   ) {
 
 
@@ -62,6 +66,19 @@ export class ProfilePage implements OnInit {
       console.error(error);
     }
   }
+
+
+  downloadURL: Observable<string>;
+
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    const filePath = '/img/';
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    task.snapshotChanges().pipe(finalize(() => this.downloadURL = fileRef.getDownloadURL())).subscribe()
+  }
+
+
 
 
   async presentLoading() {

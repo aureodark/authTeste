@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/interface/category';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -8,6 +9,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
+
+
+  /*
   public category = new Array<Category>();
   public categorias = Array();
 
@@ -24,24 +28,54 @@ export class ListPage implements OnInit {
     'bluetooth',
     'build'
   ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
+  public items: Array<{ title: string; note: string; icon: string }> = [];*/
+
   constructor(
-    private afs: AngularFirestore
+    private storage: AngularFireStorage
   ) {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+
+    /*  for (let i = 1; i < 11; i++) {
+        this.items.push({
+          title: 'Item ' + i,
+          note: 'This is item #' + i,
+          icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        });
+      }*/
+
+
+
+
+
   }
 
+
+
+
+
   ngOnInit() {
-    this.afs.collection('Category').valueChanges().subscribe(res => {
+  }
+
+
+
+  downloadURL: Observable<string>;
+
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    const filePath = '/img/';
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    task.snapshotChanges().pipe(finalize(() => this.downloadURL = fileRef.getDownloadURL())).subscribe()
+  }
+
+
+
+  /*ngOnInit() {
+   this.afs.collection('Category').valueChanges().subscribe(res => {
       this.category = res;
       console.log(this.category);
     });
+  
+
   }
 
   clicou(nome: string, color: string) {
@@ -59,5 +93,5 @@ export class ListPage implements OnInit {
   // add back when alpha.4 is out
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+  // }*/
 }

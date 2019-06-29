@@ -25,7 +25,7 @@
     </div>
   -->
 
-  <div *ngFor="let c of category">
+  <!-- <div *ngFor="let c of category">
   <ion-chip (click)="clicou(c.nome, c.color)" [id]="c.nome" >
     <ion-label >{{ c.nome }}</ion-label>
   </ion-chip>
@@ -53,6 +53,36 @@
       <ion-radio slot="start" value="buford"></ion-radio>
     </ion-item>
   </ion-radio-group>
-</ion-list>
+</ion-list> -->
+
+
+  <!-- 
+    <div>
+
+      <label for="foro"></label>
+
+      <input type="file" (change)="onFileSelected($event)">
+
+      <button type="button" (click)="onUpload()">Enviar</button>
+
+      <img [src]="preview | async" alt="" width="80%">
+    </div> -->
+
+  <div>
+    <input type="file" (change)="uploadFile($event)" />
+    {{ downloadURL | async }}
+    <img [src]="downloadURL | async" alt="" width="80%">
+  </div>
+
+
+  <!-- <div>{{ uploadPercent | async }}</div> -->
+
+  <!-- <a [href]="downloadURL | async"> </a>-->
+
+  <!-- 
+    <div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="reset" class="btn btn-primary">Cancelar</button>
+    </div> -->
 
 </ion-content>

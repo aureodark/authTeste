@@ -1,6 +1,6 @@
 export interface Profile {
     uid?: string,
-    foto?:string,
+    foto?:any,
     nome?:string,
     sobrenome?:string,
     cel?:string,

@@ -14,18 +14,18 @@
 
   <ion-list>
     <ion-item>
-        <ion-img [src]="profile.foto"></ion-img>
+      <ion-img [src]="profile.foto"></ion-img>
+      <input type="file" (change)="uploadFile($event)" />
     </ion-item>
+   <ion-item>
+    {{ downloadURL | async }}
+  </ion-item>
     <ion-item>
       <ion-label *ngIf="verdade">Editar perfil</ion-label>
       <ion-label *ngIf="!verdade">Cancelar edição</ion-label>
       <ion-toggle checked="{{verdade}}" (ionChange)="onChanged($event)"></ion-toggle>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Foto:</ion-label>
-      <ion-input [(ngModel)]="profile.foto" disabled="{{verdade}}"></ion-input>
-    </ion-item>
     <ion-item>
       <ion-label position="floating">Nome:</ion-label>
       <ion-input [(ngModel)]="profile.nome" disabled="{{verdade}}"></ion-input>

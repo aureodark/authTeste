@@ -1,6 +1,32 @@
-ion-chip {
-    --background:white;
-    --color: black;
-    box-shadow: 2px 2px ;
-    
+ion-header{
+    --ion-background-color:#191A30;
+}
+ion-back-button{
+    --color:#ff13a7;
+}
+ion-title{
+    --color:#ff13a7;
+}
+ion-content.background{
+    --ion-background-color:#191A30;
+}
+div.foto{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+img{
+    width: 30%;
+    border-radius: 50%;
+    float: left;
+}
+ion-button.foto{
+    float: right;
+}
+div.bsenha{
+    padding-top: 35%;
+}
+ion-input{
+    --color: #ffffff;
+    --placeholder-color: #ffffff;
+    --placeholder-opacity: 75%;
 }

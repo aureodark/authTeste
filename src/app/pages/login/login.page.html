@@ -1,6 +1,40 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+  <form class="box">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+        <ion-col col-6>
+          <div class="logo"> 
+            <img src="assets/logo.png"/>
+          </div>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <h1>Login</h1>
+    <input type="text" [(ngModel)]="userLogin.email" name="email" placeholder="Email">
+    <input type="password"  [(ngModel)]="userLogin.password" name="password" placeholder="Senha">
+    <h5>Ainda não tem conta?<br><strong [routerLink]="['/register']" class="registrar">Criar uma nova conta</strong></h5>
+    <input type="submit" (click)="login()" name="login" value="Entrar">
+    
+  </form>
+</ion-content>
+
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
@@ -33,3 +67,4 @@
 
 
 </ion-content>
+-->

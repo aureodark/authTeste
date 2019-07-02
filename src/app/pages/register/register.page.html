@@ -1,99 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Registrar</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
-<ion-content class="swiper-no-swiping">
-
-  <!-- <ion-segment (ionChange)="segmentChanged($event)" value="login">
-    <ion-segment-button value="login">
-      <ion-label>Login</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="register">
-      <ion-label>Cadastro</ion-label>
-    </ion-segment-button>
-  </ion-segment> -->
-
-
-  <ion-slides>
-
-    <ion-slide>
-
-      <div>
-
-
-        <span>Nome e Sobrenome</span>
-
-        <ion-item>
-          <ion-input placeholder="Nome" type="text" [(ngModel)]="profile.nome"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input placeholder="Sobrenome" type="text" [(ngModel)]="profile.sobrenome"></ion-input>
-        </ion-item>
-
-
-        <ion-button [disabled]="(profile.nome?.length < 3) || (profile.sobrenome?.length < 3)" (click)="clicou($event)">
-          Próximo</ion-button>
-
-
-      </div>
-
-    </ion-slide>
-    <ion-slide>
-
-      <div>
-
-        <span>Outras informações</span>
-
-        <ion-item>
-          <ion-label>Foto:</ion-label>
-          <ion-input type="text" [(ngModel)]="profile.foto"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-input placeholder="(XX) XXXXX-XXXX" type="tel" [(ngModel)]="profile.cel"></ion-input>
-        </ion-item>
-
-        <ion-button (click)="clicou($event)">Voltar</ion-button>
-        <ion-button [disabled]="profile.cel?.length < 11" (click)="clicou($event)">Próximo</ion-button>
-
-
-
-      </div>
-    </ion-slide>
-    <ion-slide>
-
-      <div>
-
-        <span>E-mail e Senha</span>
-
-        <ion-item>
-          <ion-input placeholder="E-mail" type="email" [(ngModel)]="userRegister.email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-input placeholder="Senha" type="password" [(ngModel)]="userRegister.password"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-input placeholder="Confirme sua senha" type="password" [(ngModel)]="confPassword"></ion-input>
-        </ion-item>
-
-        <ion-button (click)="clicou($event)">Voltar</ion-button>
-        <ion-button
-          [disabled]="(userRegister.password?.length < 8) || (userRegister.email?.length < 8) || (confPassword.length < 8)"
-          (click)="register($event)">Próximo</ion-button>
-
-
-      </div>
-
-    </ion-slide>
-  </ion-slides>
-
-
-</ion-content>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="background">
+    <form class="box">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col col-6>
+            <div class="logo"> 
+              <img src="assets/logo.png"/>
+            </div>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <h1>Login</h1>
+      <input type="text" [(ngModel)]="userLogin.email" name="email" placeholder="Email">
+      <input type="password"  [(ngModel)]="userLogin.password" name="password" placeholder="Senha">
+      <h5>Ainda não tem conta?<br><strong [routerLink]="['/register']" class="registrar">Criar uma nova conta</strong></h5>
+      <input type="submit" (click)="login()" name="login" value="Entrar">
+      
+    </form>
+  </ion-content>

@@ -1,58 +1,45 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="perfil"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      List
+      Personalizar Perfil
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
+<ion-content class="background" padding>
 
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
+  <div class="foto">
+    <img src="assets/nouser.png" />
+    <ion-button class="foto" shape="round" expand="block">Alterar imagem</ion-button>
+    <ion-button class="foto" shape="round" expand="block" color="danger">Remover imagem</ion-button>
+  </div>
 
-  <div *ngFor="let c of category">
-  <ion-chip (click)="clicou(c.nome, c.color)" [id]="c.nome" >
-    <ion-label >{{ c.nome }}</ion-label>
-  </ion-chip>
-</div>
-
-
-<ion-list>
-  <ion-radio-group>
-    <ion-list-header>
-      <ion-label>Name</ion-label>
-    </ion-list-header>
-
+  <div class="dados">
     <ion-item>
-      <ion-label>Biff</ion-label>
-      <ion-radio slot="start" value="biff" checked></ion-radio>
+      <ion-label position="floating">Usuário:</ion-label>
+      <ion-input type="text" placeholder="Digite o nome de Usuário"></ion-input>
     </ion-item>
-
     <ion-item>
-      <ion-label>Griff</ion-label>
-      <ion-radio slot="start" value="griff"></ion-radio>
+      <ion-label position="floating">Bio:</ion-label>
+      <ion-textarea></ion-textarea>
     </ion-item>
-
     <ion-item>
-      <ion-label>Buford</ion-label>
-      <ion-radio slot="start" value="buford"></ion-radio>
+      <ion-label position="stacked">Nascimento:</ion-label>
+      <ion-input type="date"></ion-input>
     </ion-item>
-  </ion-radio-group>
-</ion-list>
-
+    <ion-item>
+      <ion-label position="floating">Telefone:</ion-label>
+      <ion-input type="number" placeholder="Digite o seu número de telefone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input type="text" placeholder="Digite o seu endereço de email"></ion-input>
+    </ion-item>
+  </div>
+  <div class="bsenha">
+    <ion-button expand="block">Alterar Senha</ion-button>
+  </div>
 </ion-content>

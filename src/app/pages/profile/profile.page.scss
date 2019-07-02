@@ -1,0 +1,34 @@
+ion-header{
+    --ion-background-color:#191A30 ;
+}
+ion-menu-button{
+    --color:#ff13a7 ;
+}
+ion-content.background{
+    --ion-background-color:#191A30 ;
+}
+
+.fotoperfil{
+    padding: 0px;
+    width: 200px;
+}
+img{
+    border-radius: 50%;
+}
+.nome{
+    background-color: #ff13a7;
+    height: 60px;
+    padding-top: 1px;
+}
+h2{
+    color: white;
+    text-align: justify;
+    -moz-text-align-last: center; 
+    text-align-last: center;
+}
+ion-input{
+    --color: #ffffff;
+}
+ion-fab-button{
+    --background:#ff13a7; 
+}
